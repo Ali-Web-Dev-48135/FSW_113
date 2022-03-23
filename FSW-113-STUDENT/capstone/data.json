@@ -1,0 +1,16 @@
+{ 
+    "systems": [
+        { "sysID": 1,   "sysName": "Sales",                 "parentID": 0 },
+        { "sysID": 2,   "sysName": "Operations",            "parentID": 0 },
+        { "sysID": 3,   "sysName": "Customer Support",      "parentID": 0 },
+        { "sysID": 4,   "sysName": "Customer Aquisition",   "parentID": 1 },
+        { "sysID": 5,   "sysName": "Customer Maintenance",  "parentID": 1 },
+        { "sysID": 6,   "sysName": "Customer Incentives",   "parentID": 1 },
+        { "sysID": 7,   "sysName": "Package Builder",       "parentID": 2 },
+        { "sysID": 8,   "sysName": "Reservations",          "parentID": 2 },
+        { "sysID": 9,   "sysName": "Logistics",             "parentID": 2 },
+        { "sysID": 10,  "sysName": "Help Desk",             "parentID": 3 },
+        { "sysID": 11,  "sysName": "Database Maintenance",  "parentID": 3 },
+        { "sysID": 12,  "sysName": "System Development",    "parentID": 3 }
+    ]
+}
