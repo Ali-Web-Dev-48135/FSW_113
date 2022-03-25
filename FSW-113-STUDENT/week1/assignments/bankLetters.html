@@ -4,14 +4,25 @@
         <title></title>
         <style>
             .letter {
-                margin: 0 auto;
-                width: 400px;
-                border: black 1px solid;
+                margin: 0.2rem auto;
+                width: 700px;
+                border: 0.1rem solid black;
                 padding: 10px;
+            }
+
+            #letterDiv {
+                width: 70%;
+                margin: 0rem auto;
+                border: 2px solid black;
+                padding: 0.5rem 0.5rem;
+            }
+            h3 {
+                text-align: center;
             }
         </style>
     </head>
     <body>
+        <h3>Personalised Letter System</h3>
         <div id='letterDiv'></div>
     </body>
     <script>
@@ -33,6 +44,23 @@
         // Create a loop that iterates through the customers array. Based on the customer's balance, create a personalized copy 
         // of the appropriate letter text from below. Each letter should be contained within a div with the style of 'letter'.
 
+        
+        let x = customers.forEach(customer => {
+            let personalLetterDiv = document.createElement("div");
+            personalLetterDiv.className = 'letter';
+            letterText = customer.balance > 0 ? `Hello ${customer.fname}  this is an attempt to collect a
+             debt owed to${bankName}. Your account is past due by the amount of $${customer.balance}.`: 
+             
+             customer.balance < 0 ? 
+             `Hello ${customer.fname}, greetings from ${bankName}.Because you are such a great customer, we're lowering your interest 
+             rate to ${customer.rate}%.`: 
+             
+             `Hello ${customer.fname}, greetings from ${bankName}. Your balance is current. No need for action until next month.`;
+            personalLetterDiv.append(letterText);
+            document.getElementById("letterDiv").append(personalLetterDiv);
+        });
+  
+
         // Hello [fname], this is an attempt to collect a debt owed to [bankName]. Your account is past due by the amount of [balance].
         // Hello [fname], greetings from [bankName]. Your balance is current. No need for action until next month. 
         // Hello [fname], greetings from [bankName]. Because you are such a great customer, we're lowering your interest rate to $[rate]%. 
@@ -41,3 +69,4 @@
 
     </script>
 </html>
+

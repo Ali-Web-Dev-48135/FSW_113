@@ -22,6 +22,8 @@ switch (month) {
     default:
         days = 31
 }
+
+
     
 let x
 const weekday = today.getDay()
