@@ -29,3 +29,49 @@
   padding: 3px;
   background-color: silver;
 }
+
+.selectContainer {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  column-gap: 0.4rem;
+}
+
+.selectContainer select,
+.selectContainer input,
+.selectContainer button {
+  margin: 0.2rem 0.2rem;
+
+}
+
+.selectContainer input {
+  width: 4rem;
+}
+
+#selected_months {
+  width: 5rem;
+  border: 0.1rem solid black;
+  text-align: left;
+  background-color: white;
+}
+
+input {
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+
+}
+
+button:hover {
+  background-color: lightgreen;
+  border: white;
+  outline: none;
+}
+
+/* #selected_months option {
+  color: red;
+  font-weight: 600;
+  background-color: white;
+} */
