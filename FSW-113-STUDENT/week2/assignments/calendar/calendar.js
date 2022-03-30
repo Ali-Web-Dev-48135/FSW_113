@@ -7,7 +7,7 @@
  modify this script to use the first day of the month the user selects in place of the const today */
 
 const selectTag = document.querySelector("#selected_months");
-const inputTag = selectTag.nextElementSibling;
+const inputTagYear = selectTag.nextElementSibling;
 const goBtn = selectTag.nextElementSibling.nextElementSibling;
 
 let monthArray = ["January", "February", "March", "April", "May", "June", "July",
@@ -28,6 +28,13 @@ const populateSelect = () => {
 
 populateSelect();
 
+const validateInput = () => {
+        if (inputTagYear.value.length < 4 || isNaN(inputTagYear.value) === true) {
+            alert("Please Enter A Valid Message.");
+            inputTagYear.value = 2018;
+            return;
+    }
+};
 
 const clearCalendar = () => {
     document.getElementById("calendarDays").innerHTML = "";
@@ -36,47 +43,46 @@ const clearCalendar = () => {
 
 const populateCalendar = () => {
     clearCalendar();
-    const today = new Date(`${selectTag.value}/${userDay}/${inputTag.value}`);
-    const month = today.getMonth();
-    let days;
-    switch (month) {
-        case 1:
-            days = 28
-            break
-        case 3:
-        case 5:
-        case 8: 
-        case 10:
-            days = 30
-            break
-        default:
-            days = 31
-    }
-    
-    let x
-    const weekday = today.getDay();
-    console.log(weekday)
-    for (x = 0; x < weekday; x++){
-        document.getElementById('calendarDays').innerHTML += "<div class='blankDay'>&nbsp;</div>"
-    }
+    validateInput();
+        const today = new Date(`${selectTag.value}/${userDay}/${inputTagYear.value}`);
+        const month = today.getMonth();
+        let days;
+        switch (month) {
+            case 1:
+                days = 28
+                break
+            case 3:
+            case 5:
+            case 8: 
+            case 10:
+                days = 30
+                break
+            default:
+                days = 31
+        }
+        
+        let x
+        const weekday = today.getDay();
+        for (x = 0; x < weekday; x++){
+            document.getElementById('calendarDays').innerHTML += "<div class='blankDay'>&nbsp;</div>"
+        }
 
-    let dt = 0;
-    do {
-        dt++
-        document.getElementById('calendarDays').innerHTML += `<div class='calendarCell'>${dt}</div`
-    } while ( dt < days)
+        let dt = 0;
+        do {
+            dt++
+            document.getElementById('calendarDays').innerHTML += `<div class='calendarCell'>${dt}</div`
+        } while ( dt < days)
 
-    const monthName = today.toLocaleDateString('default', {month:'long'});
-    const year = today.getFullYear()
-    document.querySelector('.calendarTitle').innerText = `${monthName} ${year}`
+        const monthName = today.toLocaleDateString('default', {month:'long'});
+        const year = today.getFullYear()
+        document.querySelector('.calendarTitle').innerText = `${monthName} ${year}`
 
-    const remainder = (7 - ((x + dt) % 7));
-    let y = 0;
-    while ( y < remainder) {
-        document.getElementById('calendarDays').innerHTML += "<div class='blankDay'>&nbsp;</div>"
-        y++
+        const remainder = (7 - ((x + dt) % 7));
+        let y = 0;
+        while ( y < remainder) {
+            document.getElementById('calendarDays').innerHTML += "<div class='blankDay'>&nbsp;</div>"
+            y++
     }
-    
         
 };
 
