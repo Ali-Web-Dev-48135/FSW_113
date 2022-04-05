@@ -1,11 +1,8 @@
 // Getting access to the html.
 const detailsList = document.querySelector("#detailsList");
-const specialPackaging = document.querySelector("#specialPackaging");
-const hazardousMaterials = document.querySelector("#hazardousMaterials");
-const smallItemsOnly = document.querySelector("#smallItemsOnly");
-const forkLiftNeeded = document.querySelector("#forkLiftNeeded");
+
 const orderDetailsDiv = document.querySelector("#orderDetails");
-const totalSumOfItems = document.getElementById("totalItems");
+;
 
 const parts = [ 
     { partNbr: 'R5AQDVU', partDescr: 'Halbendozer', aisle: 'B3', qty: 14 },
@@ -78,67 +75,50 @@ const createTableBody = () => {
 createTableBody();
 
 
-
-const forkLiftMaterialFunction = () => {
-    let forkLiftNeededArray = parts.filter( (element) => {
-        return element.aisle != B3 && element.aisle != J4 && element.aisle != H1
-        });
-        forkLiftNeededArray.forEach( (element) => {
-            let pTagForSummary = document.createElement("p");
-            pTagForSummary.className = "materialText";
-            pTagForSummary.innerText = `
-            Location: ${element.aisle} / ${element.partNbr}/ QTY: ${element.qty}
+//If parts requiring special handling exist (in aisle B3), list of items needing 
+//special packaging in the "specialPackaging" element, else remove element
+const specialHandlingFunction = () => {
+    const specialPackaging = document.querySelector("#specialPackaging");
+    const foundElementArray = parts.filter( part => part.aisle === "B3");
+    foundElementArray.forEach(element => {
+        let paragraphText = document.createElement("p");
+        paragraphText.innerText = `
+            Item: ${element.partNbr} / Qty: ${element.qty}
             `;
-            forkLiftNeeded.append(pTagForSummary);
+            specialPackaging.append(paragraphText);
         });
 };
 
-// USING THESE VARIABLES.
-const B3 = "B3"; // Special packaging aisle.
-const J4 = "J4"; // Hazardous material aisle.
-const H1 = "H1"; // Small items aisle.
-
-const packagingMainFunction = (aisleNumberString) => {
-        
-        const aisleDictionary = {
-            B3: specialPackaging,
-            J4: hazardousMaterials,
-            H1: smallItemsOnly
-        }
-        let filteredArray = parts.filter((arrayElement) => {
-            return arrayElement.aisle === aisleNumberString;
-        });
-
-        filteredArray.forEach( (element) => {
-            let materialText = document.createElement("p");
-                materialText.className = "materialText";
-                materialText.innerText = `
-                Location: ${element.aisle} / ${element.partNbr}/ QTY: ${element.qty}
-                `;
-            aisleDictionary[element.aisle].append(materialText);
-        });
-};
-
-const specialPackagingFunction = () => {
-    packagingMainFunction(B3);
-
-};
-
-
+specialHandlingFunction();
 
 // if hazardous parts exist (in aisle J4), let employee know in the "hazardousMaterials"
 // element and remind them to get gloves, else remove element
 const hazardousPackagingFunction = () => {
-    packagingMainFunction(J4);
-};
+    const hazardousMaterials = document.querySelector("#hazardousMaterials");
+    const someHazardFound = parts.some(part => part.aisle === "J4");
+    
+    if(!someHazardFound) return;
+        let paragraphText = document.createElement("p");
+        paragraphText.innerText = "Get Gloves";
+        hazardousMaterials.append(paragraphText);
 
+
+};
+hazardousPackagingFunction();
 
 
 // if all items in the order are small parts (aisle H1), then let employee know that they should take 
 // a basket and go dirctly to aisle H1
+
 const smallItemsPackagingFunction = () => {
-    packagingMainFunction(H1);
+    const smallItemsOnly = document.querySelector("#smallItemsOnly");
+    // not all the items are small. the below returns False!. Small items div is being removed.
+    const everySmallPart = parts.every(part => part.aisle === "H1");
+    if(!everySmallPart)
+        smallItemsOnly.style.display = "none";
 };
+
+smallItemsPackagingFunction();
 
 
 
@@ -146,11 +126,20 @@ const smallItemsPackagingFunction = () => {
 // element that they will need to reserve a forklift, else remove the element
 
 const forkLiftPackagingFunction = () => {
-    forkLiftMaterialFunction();
+    const forkLiftNeeded = document.querySelector("#forkLiftNeeded");
+    const findForkLiftItems = parts.find(part => part.aisle.includes("S") || 
+                                                    part.aisle.includes("T") ||
+                                                    part.aisle.includes("U"));
+    if(findForkLiftItems === undefined)
+        forkLiftNeeded.style.display = "none";
 };
+
+forkLiftPackagingFunction();
+
 
 // sum up the total number of parts and append that number to the text already in "totalItems" element
 const displayTotalOfItems = () => {
+    const totalSumOfItems = document.getElementById("totalItems")
     const qtyNumbers = parts.map(part => part.qty);
     totalSumOfItems.innerHTML += qtyNumbers.reduce((prevValue, currValue) => {
         return prevValue + currValue;
@@ -158,8 +147,4 @@ const displayTotalOfItems = () => {
 };
 
 
-specialPackagingFunction();
-hazardousPackagingFunction();
-smallItemsPackagingFunction();
-forkLiftPackagingFunction();
 displayTotalOfItems();
