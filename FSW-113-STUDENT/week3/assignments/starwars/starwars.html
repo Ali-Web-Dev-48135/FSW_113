@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel='stylesheet' href='starwars.css'>
+        <script src="starwars.js" defer></script>
     </head>
     <body>
         <h1 style='text-align:center;' id='title'>Star Wars Data Checker</h1>
@@ -17,10 +18,10 @@
             </div>
             <div>Item Number:</div>
             <div>
-                <input type="number" style='width:25px' id='itemID' />
+                <input type="number"  id='itemID' />
             </div>
             <div>
-                <button id='fetchButton' onclick="fetchData()">Fetch Data</button>
+                <button id='fetchButton'  onclick="fetchData()">Fetch Data</button>
             </div>
         </div>
 
@@ -37,9 +38,7 @@
         
         <div class='footer'>
             <hr />
-            <a href='https://swapi.dev/api/'' target='_new'>Data courtesy of Star War API</a>
+            <a href='https://swapi.dev/api/' target='_new'>Data courtesy of Star War API</a>
         </div>
-
-        <script src='starwars.js'></script>
     </body>
 </html>
