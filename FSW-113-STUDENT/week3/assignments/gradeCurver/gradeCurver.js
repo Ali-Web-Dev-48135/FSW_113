@@ -1,19 +1,18 @@
+
 // declare each of the variables marked with "**" in the appropriate scope and using the appropriate type
 
+let range = 0;
+let gradeSlice = 0;
+let mean = 0;
+
 // create an event listener that calls the curveGrade() function when the Curve It!! button is clicked
+const submitBtn = document.getElementById("submit");
 
 // create an event listener that resets the scores and grades to their defaults when the Reset button is clicked
 
-const submitBtn = document.getElementById("submit");
-let range = maxGrade - minGrade;
-
-const  applyBell = (grade, index, ary) => {
-    
-    
-    let gradeSlice = range / 5;
+function applyBell(grade, index, ary) {
     switch (true) {
         case grade >= (mean + (gradeSlice * 2)): 
-            console.log(grade);
             ary[index] = 'A'
             break
         case grade >= (mean + gradeSlice): 
@@ -29,41 +28,49 @@ const  applyBell = (grade, index, ary) => {
             ary[index] = 'F'
             break
     }
+    document.getElementById("grades").innerText = ary.toString();
 }
 
 const  convertArray = (obj) => {
-    let ary = obj.value.split(',').map( x => parseInt(x));
+    let ary = obj.value.split(',').map( (x) =>  parseInt(x));
     return ary
 }
-
 
 // Condense the number of lines within the curveGrade() function as much as possible by converting 
 // the functions to arrow functions. You can also condense the number of lines by combining some 
 // separate lines of code into single lines. It currently has 18 lines of code. Without counting  
 // empty lines, can you get the number of lines down to 8?
 
-
-const showGrades = document.querySelector("#grades");
-const resetGrades = document.querySelector("#reset");
-
-
-const curveGrades = () => {
+function curveGrades() {
     
-    const aryGrades = convertArray(document.querySelector("#scores"));
-    console.log(aryGrades);
+    const sumGrades = array => array.reduce((accumulator, currentValue) => accumulator + currentValue);
 
-    const minGrade = aryGrades.reduce((a, b) => Math.min(a,b));
-    const maxGrade = aryGrades.reduce((a, b) => Math.max(a,b)); 
+    const  aryGrades = convertArray(document.querySelector('#scores'));
 
-    const sum = (accumulator, currentValue) => accumulator + currentValue;
-    const sumGrades = (array) => array.reduce(sum);
-    let mean = sumGrades(aryGrades) / aryGrades.length;
+    let minGrade =  aryGrades.reduce((a, b) => Math.min(a, b));
+    
+    let maxGrade = aryGrades.reduce((a, b) =>  Math.max(a, b));
+    
+    mean = sumGrades(aryGrades) / aryGrades.length;
+    
+    range = maxGrade - minGrade;
 
-    console.log("Transformed array printing...");
-    // write the value of aryGrades to the grades div in the HTML document
-    showGrades.innerText = `${aryGrades.forEach(applyBell)}`;
+    gradeSlice = range / 5;
+
+    aryGrades.forEach(applyBell);
+
+    
+   
+    // write the value of aryGrades to the grades div in the HTML document.
+   // added the above comment logic on line 31.
+    
+}
+
+const resetHandler = () => {
+    document.getElementById("scores").value = "";
+    document.getElementById("grades").innerText = "Curved Grades Show Here";
 };
 
+const resetBtn = document.getElementById("reset");
+resetBtn.addEventListener("click", resetHandler);
 submitBtn.addEventListener("click", curveGrades);
-resetGrades.addEventListener("click", () => console.log('Hello World'));
-
