@@ -5,7 +5,20 @@
 // Sort that array and display it in the 'AllItems' element on the scavenger.html document.
 
 function combineLists() {
+    const listOne = document.getElementById("scavenger-0").value.split(",");
+    const listTwo = document.getElementById("scavenger-1").value.split(",");
+    const listThree = document.getElementById("scavenger-2").value.split(",");
+    const listFour = document.getElementById("scavenger-3").value.split(",");
+    const allItemsDiv = document.getElementById("AllItems");
+    const arraysMerged = [...listOne, ...listTwo, ...listThree, ...listFour];
+    allItemsDiv.innerText = arraysMerged.sort();
+
+
 }
+
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener("click", combineLists);
+
 
 // The following code is a bonus addition that facilitates data entry on the scavenger.html document.
 // If you first click in one of the textareas, you can then click scavenger hunt items in the unordered
