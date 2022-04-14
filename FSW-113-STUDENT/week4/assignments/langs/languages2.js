@@ -4,16 +4,23 @@ const lang = 'JavaScript'
 // a single array using the spread operator. Call the chkLang() function, passing in 
 // the array as an argument.
 
+const submitBtn = document.querySelector("button");
+const queriedInputs = document.querySelectorAll("input");
 
-function chkLang(langs) {
-    let result = false
 
+
+const chkLang = langs => {
+    let mergedArrays = [];
     // use an array method to check whether the user included 'JavaScript' in their
     // list of languages
-
-    let obj = document.querySelector('#TestResult')
-    if (result) 
-        obj.innerText = `Congratulations!\nYou know ${lang}.`
+    langs.forEach(element => mergedArrays.push(...element.value.split(" ")));
+    let jsIncluded = mergedArrays.some(element => element === lang);
+    let obj = document.querySelector('#TestResult');
+    if (jsIncluded) 
+        obj.innerText = `Congratulations!\nYou know ${lang}.`;
     else
-        obj.innerText = `Sorry,\nyou don't know ${lang}.`
+        obj.innerText = `Sorry,\nyou don't know ${lang}.`;
 }
+
+submitBtn.addEventListener("click", chkLang.bind(null, queriedInputs));
+
