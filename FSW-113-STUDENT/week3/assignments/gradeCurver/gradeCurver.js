@@ -1,7 +1,7 @@
 
 // declare each of the variables marked with "**" in the appropriate scope and using the appropriate type
 
-let range = 0;
+
 let gradeSlice = 0;
 let mean = 0;
 
@@ -28,7 +28,7 @@ function applyBell(grade, index, ary) {
             ary[index] = 'F'
             break
     }
-    document.getElementById("grades").innerText = ary.toString();
+    
 }
 
 const  convertArray = (obj) => {
@@ -52,17 +52,13 @@ function curveGrades() {
     let maxGrade = aryGrades.reduce((a, b) =>  Math.max(a, b));
     
     mean = sumGrades(aryGrades) / aryGrades.length;
-    
-    range = maxGrade - minGrade;
 
-    gradeSlice = range / 5;
+    gradeSlice = (maxGrade - minGrade) / 5;
 
     aryGrades.forEach(applyBell);
-
-    
    
     // write the value of aryGrades to the grades div in the HTML document.
-   // added the above comment logic on line 31.
+   document.getElementById("grades").innerText = ary.toString();
     
 }
 
