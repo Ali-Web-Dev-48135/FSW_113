@@ -24,3 +24,7 @@ const chkLang = langs => {
 
 submitBtn.addEventListener("click", chkLang.bind(null, queriedInputs));
 
+
+
+
+
