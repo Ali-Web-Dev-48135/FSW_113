@@ -9,53 +9,63 @@
 
 
 class Student{
-        // let studentNameElement = document.getElementById("studentName");
-        // const classNameElement = document.getElementById("className");
-        // const studentScoresElement = document.getElementById("studentScores");    
-        // const possibleScoresElement = document.getElementById("possibleScores");
     
-    constructor() {
-        this.studentNameDomElement = document.getElementById("studentName").value;
-        this.classNameDomElement = document.getElementById("className").value;
-        this.studentScoresDomELement = document.getElementById("studentScores").value;
-        this.possibleScoresDomElement = document.getElementById("possibleScores").value
-        this.ValidateInputs();
+    constructor(name, className, studentScores, possibleScores) {
+        this.studentName = name;
+        this.studentClassName = className;
+
+        // Array of student test scores.
+        this.studentScores = studentScores;
+        // Array of student max possible scores;
+        this.possibleScores = possibleScores;
+        
     }
 
+    // maybe delete this validating method or refactor.
     ValidateInputs() 
     {
-        if(this.studentNameDomElement.value === "" ||
-           this.classNameDomElement.value === "" ||
-           this.studentScoresDomELement.value === "" ||
-           this.possibleScoresDomElement.value === ""
+        if(this.studentName === "" ||
+           this.studentClassName === "" ||
+           this.studentScores === "" ||
+           this.possibleScores === ""
            )
-           alert("Please enter all required fields!");
-           
-           return;
+           {
+            alert("Please enter all required fields!");
+            return 1;
+           }
+        else 
+        {
+            return 0;
+        }
         
     }
-    AddingStudentScores(array)
+    AddingStudentScores()
     {
         
-        return array.reduce((p, c) => p + c);
+        return this.studentScores.reduce((p, c) => p + c, 0);
     }
 
-    AddingPossibleScores(array) 
+    AddingPossibleScores() 
     {
-        return array.reduce((p, c) => p + c);
+        return this.possibleScores.reduce((p, c) => p + c, 0);
     }
 
-    CalculateLetterGrade(score, possibleScore) 
+    CalculateLetterGrade() 
     {
-        // let studentGrade = this.AddingStudentScores();
-        // let possibleGrade = this.AddingPossibleScores();
+        
+        let score = this.AddingStudentScores();
+        let possibleScore = this.AddingPossibleScores();
 
         let letterGradeVal = Number((score/ possibleScore).toFixed(1));
         if(letterGradeVal <= 0.3)
         {
-            return "D";
+            return "F";
         } 
         else if(letterGradeVal <= 0.6)
+        {
+            return "D";
+        }
+        else if(letterGradeVal <= 0.7)
         {
             return "C";
         }

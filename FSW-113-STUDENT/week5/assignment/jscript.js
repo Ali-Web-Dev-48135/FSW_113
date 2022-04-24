@@ -12,20 +12,20 @@ const studentClassGradeCertificateElement = document.getElementById("certGrade")
 // Add am evemt listener that responds to the click of the "print" button by calling a function to instantiate
 //  a new student object, and another function to print the certificate.
 
-const init = (studentObject) => {
-    // getting and assigning the values for student name and class to the dom.
-    studentNameCertificateElement.innerText = studentObject.studentNameDomElement;
-    studentClassNameCertificateElement.innerText = studentObject.classNameDomElement;
-
-    // splitting the strings for the grades and possibl scores into an array
-    const splitedGrades = convertStringToArray(studentObject.studentScoresDomELement);    
-    const reducedGrade = studentObject.AddingStudentScores(splitedGrades); 
-
-    const splitedPossibleGrades = convertStringToArray(studentObject.possibleScoresDomElement);
-    const reducedPossibleGrades = studentObject.AddingPossibleScores(splitedPossibleGrades);
+const init = () => {
     
-    // assigning the final grade to the certificate dom element.
-    studentClassGradeCertificateElement.innerText = studentObject.CalculateLetterGrade(reducedGrade, reducedPossibleGrades);
+    // returning the student instance from the studentInstanceFunction function.
+    let student = studentInstanceFunction();
+    // console.log(student.ValidateInputs)();
+    
+    if(student.ValidateInputs() === 1) return;
+
+        // getting and assigning the values for student name and class to the dom.
+        studentNameCertificateElement.innerText = student.studentName;
+        studentClassNameCertificateElement.innerText = student.studentClassName;
+
+        // assigning the final grade to the certificate dom element.
+        studentClassGradeCertificateElement.innerText = student.CalculateLetterGrade();    
     
 
 };
@@ -46,10 +46,17 @@ resetButtonElement.addEventListener("click", resetStudentForm);
 // Create a function that instantiates a new student object with the input from the HTML form.
 
 const studentInstanceFunction = () => {
-    init(new Student());
+    
+    let studentObject = new Student(
+        document.getElementById("studentName").value,
+        document.getElementById("className").value,
+        convertStringToArray(document.getElementById("studentScores").value),
+        convertStringToArray(document.getElementById("possibleScores").value)
+    );
+        return studentObject;
 };
 
-printCertificateElement.addEventListener("click", studentInstanceFunction);
+printCertificateElement.addEventListener("click", init);
 
 // calculating grades from the string input converted to an array
 // the calculation is being done through the class.
