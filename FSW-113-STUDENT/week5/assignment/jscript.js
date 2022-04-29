@@ -69,3 +69,7 @@ printCertificateElement.addEventListener("click", init);
 const convertStringToArray = (stringToConvert) => {
     return stringToConvert.split(",").map((number) => parseInt(number));
 }
+
+// The http-server paradigm was straight forward to understand and use.
+// A promise to me is a function, or a special type of function which promieses to either do or don't fulfill a task.
+//
