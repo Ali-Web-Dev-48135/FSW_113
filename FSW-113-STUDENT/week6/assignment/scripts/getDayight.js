@@ -6,14 +6,14 @@ whether it*/
  return "blue" and "black" if night time.*/
 
 
-export const dayOrNightFunction = (dataToWorkWith) => {
-  if(dataToWorkWith.dt > dataToWorkWith.sys.sunrise)
+export const dayOrNightFunction = (sunrise, sunset, currentTime) => {
+  if((currentTime > sunrise && currentTime < sunset ))
   {
-    return "black";
+    return "blue";
   }
   else
   {
-    return "blue";
+    return "black";
   }
 
 };

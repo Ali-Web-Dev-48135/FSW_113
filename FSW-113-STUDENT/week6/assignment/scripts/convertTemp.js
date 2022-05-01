@@ -15,15 +15,16 @@ degrees in either fahrenheit or centigrade.*/
 
 
 
-export const convertToF = (dataToCheck) => {
-    if(!dataToCheck.sys.country === "US")
+export const convertToF = (country, temp) => {
+    let convertedTemperature;
+    if(country != "US")
     {
-        
-        return `${dataToCheck.main.temp * 10 - 273.15}C`;
+        const celcius = parseInt((temp - 273.15)); 
+        return `${celcius}C`;
     }
     else
     {
-        const farenheit = parseInt((dataToCheck.main.temp - 273.15) * 1.8000 + 32.00); 
+        const farenheit = parseInt((temp - 273.15) * 1.8000 + 32.00); 
         return `${farenheit}F`;
     }
 };

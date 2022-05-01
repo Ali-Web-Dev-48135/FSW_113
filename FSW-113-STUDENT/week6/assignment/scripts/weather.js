@@ -24,8 +24,7 @@ function to write the weather data to the HTML page
 
 function callWeatherFunction()
 {
-     const promisedReturned = fetchWeatherData();
-     promisedReturned
+     fetchWeatherData()
      .then( async (response) => {
         const data = await response.json();
         writeWeatherData(data);
@@ -43,8 +42,7 @@ and returns the resulting data
 async function fetchWeatherData()
 {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInputValue.value}&appid=6e2a74544f540cd27acce68e701f97e3`);
-    const responseData = response;
-    return responseData;
+    return response;
 }
 
 /*
@@ -62,20 +60,11 @@ function writeWeatherData(dataToWorkWith)
     const humidDataValue = document.querySelector("#humidData");
     const conditionsData = document.querySelector("#conditionsData");
     const weatherWrapper = document.querySelector(".weatherWrapper");
-
-    const blueOrBlack = dayOrNightFunction(dataToWorkWith);
-    if(blueOrBlack === "black")
-    {
-        weatherWrapper.classList.add("nightTime");
-    }
-    else
-    {
-        weatherWrapper.classList.add("dayTime");
-    }
-    
-    tempDataValue.innerHTML = convertToF(dataToWorkWith);
+    console.log(dataToWorkWith);
+    weatherWrapper.style.backgroundColor  = dayOrNightFunction(dataToWorkWith.sys.sunrise, dataToWorkWith.sys.sunset, dataToWorkWith.dt);
+    tempDataValue.innerHTML = convertToF(dataToWorkWith.sys.country, dataToWorkWith.main.temp);
     humidDataValue.innerHTML = dataToWorkWith.main.humidity + "%";
-    conditionsData.innerHTML =dataToWorkWith.weather[0].description;
+    conditionsData.innerHTML = dataToWorkWith.weather[0].description;
 }
 
 
