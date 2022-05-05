@@ -3,3 +3,193 @@
     to the example as possible. You will need to use display:grid to make the 
     bug reports display in three columns (see week 4).
 */
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    background: url("./images/wallpaper.jpg");
+    background-repeat: repeat;
+    
+}
+
+.reportWrapper
+{
+    border: 0.1rem solid white;
+    width: 20rem;
+    margin: 0.2rem auto 0.5rem auto;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+form
+{
+    /* border: 1px solid white; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+#bugForm div,
+#bugForm input,
+#bugForm select
+{
+    width: 100%;
+    margin: 0.2rem 0rem 0rem 0rem;
+    border: none;
+    border-radius: 0.2rem;
+}
+
+
+
+#bugForm option
+{
+    width: 100%;
+}
+
+.reportWrapper #topbar
+{
+    width: 100%;
+    background-color: red;
+    border-radius: 0.1rem;
+
+}
+
+/* changing background colors for  
+the divs and inputs seperately */
+
+#reporterByDiv,
+#reporterByDiv input
+{
+    background-color: lightgray;
+}
+
+#systemDiv,
+#systemDiv select
+{
+    background-color: lightgray;
+}
+
+#subSystemDiv,
+#subSystemDiv select
+{
+    background-color: lightgray;
+}
+
+#bttnDiv
+{
+    width: 100%;
+    text-align: right;
+    padding: 0.3rem;
+    /* background-color: white; */
+    
+}
+
+#bugDescrDiv
+{
+    width: 100%;
+    /* background-color: red; */
+    text-align: center;
+}
+
+textarea
+{
+    width:100%;
+    background-color: lightgray;   
+    margin-top: 0.2rem;
+}
+
+
+#bttnDiv button
+{
+
+    background-color: red;
+    color: white;
+    margin: 0rem 0.2rem;
+    padding: 0.2rem;
+    cursor: pointer;   
+}
+
+.listWrapper
+{
+    width: 80%;
+    margin: 0rem auto;
+    border: 0.1rem solid white;
+    background-color: transparent;
+    padding: 0.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    
+}
+
+.listWrapper .bugContainer
+{
+    color: black;
+    border: 0.1rem solid white;
+    background-color: lightgray;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+    margin: 0.2rem 0.1rem;
+    width: 90%;
+
+}
+
+.bugContainer.bugCompleteStyle
+{
+    background-color: darkgreen;
+    color: white;
+}
+
+.bugContainer h5,
+.bugContainer p
+{
+    font-size: 1.2rem;
+    margin: 0rem;
+}
+
+
+.bugContainer p
+{
+    word-wrap: break-word;
+}
+
+.listWrapper button
+{
+    text-align: center;
+    cursor: pointer;
+
+}
+.listWrapper .deleteBtn
+{
+    background-color: lightcoral;
+    color: white;
+    border: 0.1rem solid black;
+
+}
+
+.listWrapper .doneBtn
+{
+    background-color: lightgreen;
+    color: white;
+    border: 0.1rem solid black;
+}
+
+.listWrapper button:hover
+{
+    border: 1px solid black;
+    color: red;
+    background-color: lightgray;
+}
+
+
